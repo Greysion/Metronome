@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2618416059960832919}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -91,7 +91,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!96 &1049403823949759902
 TrailRenderer:
@@ -134,45 +134,27 @@ TrailRenderer:
   m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.41
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5025902
-        inSlope: 0
-        outSlope: 0
+        value: 1
+        inSlope: -2.4764314
+        outSlope: -2.4764314
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.3407603
-        value: 0.34669954
-        inSlope: -0.69766885
-        outSlope: -0.69766885
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.37853622
-      - serializedVersion: 3
-        time: 0.747045
-        value: 0.2471803
-        inSlope: -0.6275203
-        outSlope: -0.6275203
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.49477896
+        outWeight: 0.096244134
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -0.043279484
-        outSlope: -0.043279484
+        inSlope: -0.04504599
+        outSlope: -0.04504599
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.42943794
+        inWeight: 0.115023494
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -227,6 +209,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fa505057423e7418b4be0c6fa9720d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeX: 0
-  sizeY: 0
   speed: 30
