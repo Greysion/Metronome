@@ -14,41 +14,44 @@ public class BossAttack : MonoBehaviour
 	[SerializeField]
 	int maxPositions = 10;
 
+	[SerializeField]
+	float bpm = 120, lowestBeatTime = 16;
+
+	float secondPerBeat;
+
 	int currentWavePosition;
 
 	float anglePerPosition;
 
-	enum SpreadType { Pulse, Wave, Random }
+	enum SpreadType { Pulse, Wave, Random, Directed }
 
 	[SerializeField]
 	SpreadType currentSpread = SpreadType.Wave;
 
-	Timer timer;
+	float timer;
+
+	int beats;
 
     // Start is called before the first frame update
     void Start()
     {
 		anglePerPosition = (maxAngle * 2) / maxPositions;
-		timer = FindObjectOfType<Timer>();
+		secondPerBeat = 60 / bpm;
+		InvokeRepeating("Beat", 0, secondPerBeat / lowestBeatTime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(timer.quarterBeat)
-		{
-			Attack(currentSpread);
-		}
-    }
-
-	
+	void Beat()
+	{
+		Attack(currentSpread);
+		beats++;
+	}
 
 	void Attack(SpreadType spread)
 	{
 		switch(spread)
 		{
 			case SpreadType.Pulse:
-				if (timer.beat)
+				if (beats % 4 == 0)
 					break;
 				for (int i = 0; i <= maxPositions; i++)
 				{
