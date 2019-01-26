@@ -5,24 +5,36 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField]
-	float sizeX, sizeY;
-
-	[SerializeField]
 	float speed;
 
-    // Start is called before the first frame update
-    void Start()
+	Camera mainCamera;
+
+	private void Start()
+	{
+		mainCamera = Camera.main;
+	}
+
+	// Update is called once per frame
+	void Update()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
 		Vector3 mouseMovement = Input.mousePosition;
 		mouseMovement.z = 10;
-		mouseMovement = Camera.main.ScreenToWorldPoint(mouseMovement);
+		mouseMovement = mainCamera.ScreenToWorldPoint(mouseMovement);
 		transform.position = Vector3.Lerp(transform.position, mouseMovement, Time.deltaTime * speed);
     }
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if(collision.transform.tag == "Bullet")
+		{
+			TakeDamage();
+			Destroy(collision.gameObject);
+		}
+	}
+
+	void TakeDamage()
+	{
+		print("Ouch");
+	}
+
 }

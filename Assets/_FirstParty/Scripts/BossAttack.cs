@@ -70,7 +70,7 @@ public class BossAttack : MonoBehaviour
 
 	void Fire(float angle)
 	{
-		Quaternion newAngle = Quaternion.Euler(0,0,angle);
+		Quaternion newAngle = Quaternion.Euler(0, 0, angle);
 		Instantiate(bullet, transform.position, newAngle);
 	}
 
