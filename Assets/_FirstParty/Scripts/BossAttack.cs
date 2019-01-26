@@ -49,7 +49,7 @@ public class BossAttack : MonoBehaviour
 		anglePerPosition = (maxAngle * 2) / maxPositions;
 		secondPerBeat = 60 / bpm;
 		InvokeRepeating("Beat", 0, secondPerBeat / lowestBeatTime);
-		player = FindObjectOfType<PlayerMovement>().transform;
+		player = FindObjectOfType<Player>().transform;
     }
 
 	public void Beat()

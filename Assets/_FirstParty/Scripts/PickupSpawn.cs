@@ -10,23 +10,28 @@ public class PickupSpawn : MonoBehaviour
 	[SerializeField]
 	GameObject music;
 
+	[SerializeField]
+	float timeToSpawn = 20f;
+
+	float time;
+
 	// Start is called before the first frame update
 	void Start()
 	{
 		mainCamera = Camera.main;
-		InvokeRepeating("SpawnMusic", 20, 20);
+		Invoke("SpawnMusic", timeToSpawn);
+		Player.LevelGained += GainLevel;
+		Player.LevelLost += LoseLevel;
 	}
 
 	Vector3 SpawnLocation()
 	{
-		float maxX = mainCamera.rect.xMax;
-		float minX = mainCamera.rect.xMin;
-		float maxY = mainCamera.rect.yMax;
-		float minY = mainCamera.rect.yMin;
+		float height = mainCamera.orthographicSize - 1;
+		float width = mainCamera.aspect * height;
 		Vector3 spawnPoint = new Vector3
 		{
-			x = Random.Range(minX, maxX),
-			y = Random.Range(minY, maxY),
+			x = Random.Range(-width, width),
+			y = Random.Range(-height, height),
 			z = 0
 		};
 
@@ -36,7 +41,21 @@ public class PickupSpawn : MonoBehaviour
 	void SpawnMusic()
 	{
 		Instantiate(music, SpawnLocation(), Quaternion.identity, transform);
+		time = Time.time;
 	}
 
+	void GainLevel()
+	{
+		Invoke("SpawnMusic", timeToSpawn);
+	}
+
+	void LoseLevel()
+	{
+		if (IsInvoking("SpawnMusic"))
+		{
+			CancelInvoke("SpawnMusic");
+			Invoke("SpawnMusic", (timeToSpawn - (Time.time - time)) / 2);
+		}
+	}
     
 }
