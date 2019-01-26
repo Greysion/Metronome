@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField]
-	float speed;
+	float speed = 20;
 
 	Camera mainCamera;
 
@@ -26,7 +26,8 @@ public class PlayerMovement : MonoBehaviour
 		Vector3 mouseMovement = Input.mousePosition;
 		mouseMovement.z = 10;
 		mouseMovement = mainCamera.ScreenToWorldPoint(mouseMovement);
-		transform.position = Vector3.Lerp(transform.position, mouseMovement, Time.deltaTime * speed);
+		transform.position = Vector3.MoveTowards(transform.position, mouseMovement, Time.deltaTime * speed);
+		//transform.position = mouseMovement;
     }
 
 	private void OnCollisionEnter(Collision collision)
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 		else if (tag == "PickUp")
 		{
 			GainLevel();
+			Destroy(collision.gameObject);
 		}
 	}
 

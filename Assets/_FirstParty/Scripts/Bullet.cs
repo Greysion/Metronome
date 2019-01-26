@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour
     void Update()
     {
 		Vector3 movement = transform.up * speed * Time.deltaTime;
-		transform.Translate(movement);
+		//transform.Translate(movement);
+		transform.position += movement;
     }
 }

@@ -9,7 +9,10 @@ public class BossAttack : MonoBehaviour
 	GameObject bullet;
 
 	[SerializeField]
-	float maxAngle = 45, distance;
+	Transform bulletContainer;
+
+	[SerializeField]
+	float maxAngle = 45;
 
 	[SerializeField]
 	int maxPositions = 10;
@@ -49,7 +52,7 @@ public class BossAttack : MonoBehaviour
 		player = FindObjectOfType<PlayerMovement>().transform;
     }
 
-	void Beat()
+	public void Beat()
 	{
 		Attack(currentSpread);
 		beats++;
@@ -84,6 +87,8 @@ public class BossAttack : MonoBehaviour
 				Fire(SelectAngle(Random.Range(0, maxPositions + 1)));
 				break;
 			case SpreadType.Directed:
+				if (beats % 8 != 0)
+					break;
 				Fire(DirectionToTarget(player));
 				break;
 
@@ -93,12 +98,12 @@ public class BossAttack : MonoBehaviour
 	void Fire(float angle)
 	{
 		Quaternion newAngle = Quaternion.Euler(0, 0, angle);
-		Instantiate(bullet, transform.position, newAngle);
+		Instantiate(bullet, transform.position, newAngle, bulletContainer);
 	}
 
 	void Fire(Vector3 direction)
 	{
-		GameObject spawned = Instantiate(bullet, transform.position, Quaternion.identity);
+		GameObject spawned = Instantiate(bullet, transform.position, Quaternion.identity, bulletContainer);
 		spawned.transform.up = direction;
 	}
 

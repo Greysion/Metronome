@@ -9,10 +9,10 @@ public class BossMovement : MonoBehaviour
 	Transform player;
 
 	[SerializeField]
-	float maxDistance;
+	float maxDistance = 5;
 
 	[SerializeField]
-	float speed;
+	float speed = 0.2f;
 
     // Update is called once per frame
     void Update()
