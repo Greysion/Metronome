@@ -33,6 +33,12 @@ sysinfo.txt
 /**/fmod.log
 /**/fmod_editor.log
 
+/**/[Ff][Mm][Oo][Dd]/*.user
+/**/[Ff][Mm][Oo][Dd]/*.unsaved
+/**/[Ff][Mm][Oo][Dd]/*.cache
+/**/[Ff][Mm][Oo][Dd]/*.restore
+/**/[Ff][Mm][Oo][Dd]/**/*.meta
+
 [Aa]ssets/StreamingAssets/**/*.bank
 [Aa]ssets/StreamingAssets/**/*.bank.meta
 [Aa]ssets/StreamingAssets/**/*.strings.bank
