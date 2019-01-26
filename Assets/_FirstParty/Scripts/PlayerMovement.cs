@@ -9,6 +9,12 @@ public class PlayerMovement : MonoBehaviour
 
 	Camera mainCamera;
 
+	int health = 5;
+
+	public int pickupLevel;
+
+	public bool invulnerable;
+
 	private void Start()
 	{
 		mainCamera = Camera.main;
@@ -25,16 +31,55 @@ public class PlayerMovement : MonoBehaviour
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if(collision.transform.tag == "Bullet")
+		string tag = collision.transform.tag;
+		if(tag == "Bullet")
 		{
 			TakeDamage();
 			Destroy(collision.gameObject);
+		}
+		else if (tag == "PickUp")
+		{
+			GainLevel();
 		}
 	}
 
 	void TakeDamage()
 	{
-		print("Ouch");
+		if (invulnerable)
+			return;
+		health--;
+		if(health <= 0)
+		{
+			LoseLevel();
+		}
+		invulnerable = true;
+		Invoke("InvulnerabilityOver", 0.8f);
+	}
+
+	void InvulnerabilityOver()
+	{
+		invulnerable = false;
+	}
+
+	void LoseLevel()
+	{
+		pickupLevel--;
+		if(pickupLevel <= 0)
+		{
+			LoseGame();
+		}
+		health = 5;
+	}
+
+	void GainLevel()
+	{
+		pickupLevel++;
+		health = 5;
+	}
+
+	void LoseGame()
+	{
+		print("Game Lost");
 	}
 
 }
