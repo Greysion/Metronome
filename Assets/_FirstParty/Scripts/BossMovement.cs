@@ -15,7 +15,7 @@ public class BossMovement : MonoBehaviour
 
 	private void Start()
 	{
-		player = FindObjectOfType<PlayerMovement>().transform;
+		player = FindObjectOfType<Player>().transform;
 	}
 
 	// Update is called once per frame
