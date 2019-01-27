@@ -108,13 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 3898775066879681158, guid: 5019f33210e95b84bb062c538f546004, type: 3}
   bulletContainer: {fileID: 0}
-  maxAngle: 90
-  maxPositions: 15
-  bpm: 60
-  lowestBeatTime: 16
-  currentSpread: 3
-  patternLimit: 32
-  attackPattern: 00000000010000000200000003000000000000000100000000000000030000000200000001000000
+  bulletSpeed: 5
+  patternLimit: 16
 --- !u!114 &1544198302635397841
 MonoBehaviour:
   m_ObjectHideFlags: 0
