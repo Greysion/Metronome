@@ -46,6 +46,7 @@ public class AudioManager : MonoBehaviour {
 	private void Start() {
 
 		SpeedReset();
+		DamagedFilter(100f);
 
 	}
 
