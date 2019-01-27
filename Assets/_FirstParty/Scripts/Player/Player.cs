@@ -117,6 +117,7 @@ public class Player : MonoBehaviour
 	void TakeDamage()
 	{
 		audioManager.HitSFX();
+		audioManager.DamagedFilter(10f);
 		health--;
 		if(health <= 0)
 		{
@@ -128,6 +129,7 @@ public class Player : MonoBehaviour
 
 	void InvulnerabilityOver()
 	{
+		audioManager.DamagedFilter(100f);
 		invulnerable = false;
 	}
 
@@ -137,7 +139,7 @@ public class Player : MonoBehaviour
 		print("Level Lost");
 		LevelLost(pickupLevel);
 		pickupLevel--;
-		if(pickupLevel <= 0)
+		if(pickupLevel < 0)
 		{
 			LoseGame();
 			pickupLevel = 0;
@@ -161,11 +163,13 @@ public class Player : MonoBehaviour
 	void LoseGame()
 	{
 		FindObjectOfType<GameManager>().GameOver();
+		audioManager.StopMusic();
 	}
 
 	void WinGame()
 	{
-		print("Game Won");
+		FindObjectOfType<GameManager>().GameOver();
+		audioManager.StopMusic();
 	}
 
 }

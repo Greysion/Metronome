@@ -239,8 +239,8 @@ MonoBehaviour:
   cameraAnchor: {fileID: 0}
   isRumbling: 0
   currentRumble: 0
-  maxRumble: 10
-  rumbleLerpSpeed: 5
+  maxRumble: 8
+  rumbleLerpSpeed: 4
   cameraSpeed: 5
 --- !u!114 &3133308029812113573
 MonoBehaviour:
@@ -346,6 +346,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 971194625656253712}
     m_Modifications:
+    - target: {fileID: 8189510997948822851, guid: ed25d3378c5199e4bb2663fa3d82e863,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioController
+      objectReference: {fileID: 0}
     - target: {fileID: 993719819729301911, guid: ed25d3378c5199e4bb2663fa3d82e863,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -400,11 +405,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8189510997948822851, guid: ed25d3378c5199e4bb2663fa3d82e863,
-        type: 3}
-      propertyPath: m_Name
-      value: AudioController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed25d3378c5199e4bb2663fa3d82e863, type: 3}
@@ -496,6 +496,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 971194625656253712}
     m_Modifications:
+    - target: {fileID: 832741328736036935, guid: 8f00b095c9f25734181327216a47828d,
+        type: 3}
+      propertyPath: m_Name
+      value: ppFade
+      objectReference: {fileID: 0}
+    - target: {fileID: 832741328736036935, guid: 8f00b095c9f25734181327216a47828d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3815026094084927772, guid: 8f00b095c9f25734181327216a47828d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -551,10 +561,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 832741328736036935, guid: 8f00b095c9f25734181327216a47828d,
+    - target: {fileID: 5364533825993085069, guid: 8f00b095c9f25734181327216a47828d,
         type: 3}
-      propertyPath: m_Name
-      value: ppFade
+      propertyPath: weight
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f00b095c9f25734181327216a47828d, type: 3}
@@ -571,6 +581,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 971194625656253712}
     m_Modifications:
+    - target: {fileID: 3747193549708842535, guid: 1bd4e8872a51bcf459fb62795161918e,
+        type: 3}
+      propertyPath: m_Name
+      value: ppGlobal
+      objectReference: {fileID: 0}
     - target: {fileID: 8102587724790843751, guid: 1bd4e8872a51bcf459fb62795161918e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -625,11 +640,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3747193549708842535, guid: 1bd4e8872a51bcf459fb62795161918e,
-        type: 3}
-      propertyPath: m_Name
-      value: ppGlobal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bd4e8872a51bcf459fb62795161918e, type: 3}

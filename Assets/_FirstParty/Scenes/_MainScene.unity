@@ -408,18 +408,7 @@ PrefabInstance:
       propertyPath: cameraAnchor
       value: 
       objectReference: {fileID: 46893887}
-    - target: {fileID: 8322528256543931462, guid: 754d1d3561118da4d9b7852024264399,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3639847064269489292, guid: 754d1d3561118da4d9b7852024264399,
-        type: 3}
-      propertyPath: weight
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5666599425196624468, guid: 754d1d3561118da4d9b7852024264399, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 754d1d3561118da4d9b7852024264399, type: 3}
 --- !u!1001 &7369516604888385199
 PrefabInstance:

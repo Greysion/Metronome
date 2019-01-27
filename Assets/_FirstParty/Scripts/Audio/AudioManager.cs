@@ -38,6 +38,7 @@ public class AudioManager : MonoBehaviour {
 
 		mainTheme = RuntimeManager.CreateInstance("event:/Soundtrack");
 		mainTheme.getParameter("health", out mainThemeHealth);
+		currentSpeed = startingSpeed;
 
 	}
 
