@@ -232,7 +232,7 @@ public class BossAttack : MonoBehaviour
 		SetSpreadType(currentLevel);
 		float speedIncrease = audioManager.speedStep;
 		bpm *= 1 + speedIncrease;
-		bulletSpeed *= 1.3f;
+		bulletSpeed *= 1.5f;
 		SetupBPM();
 	}
 

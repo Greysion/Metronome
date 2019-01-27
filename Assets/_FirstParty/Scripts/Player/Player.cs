@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
 
 	void LoseGame()
 	{
-		print("Game Lost");
+		FindObjectOfType<GameManager>().GameOver();
 	}
 
 	void WinGame()
