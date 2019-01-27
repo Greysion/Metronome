@@ -57,7 +57,6 @@ public class BossAttack : MonoBehaviour
 		audioManager = FindObjectOfType<AudioManager>();
 		Player.LevelGained += GainLevel;
 		Player.LevelLost += LoseLevel;
-		StartBeat();
     }
 
 	void SetupBPM()
