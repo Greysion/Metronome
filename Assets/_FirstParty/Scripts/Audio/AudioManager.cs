@@ -6,8 +6,8 @@
 // --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 using UnityEngine;
-using FMOD.Studio;
 using FMODUnity;
+using FMOD.Studio;
 
 public class AudioManager : MonoBehaviour {
 
@@ -15,14 +15,13 @@ public class AudioManager : MonoBehaviour {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[SerializeField] private EventInstance mainTheme;
-	[SerializeField] private ParameterInstance mainThemeHealth;
+	EventInstance mainTheme;
+	ParameterInstance mainThemeHealth;
 
-	private FMOD.DSP fft;
+	[SerializeField] public float startingSpeed = 0.8f;
+	[SerializeField] public float speedStep = 0.05f;
 
-	[SerializeField] private float startingSpeed = 0.8f;
 	[SerializeField] private float currentSpeed = 0f;
-	[SerializeField] private float speedStep = 0.1f;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -42,21 +41,11 @@ public class AudioManager : MonoBehaviour {
 
 	}
 
+	/* ----------------------------------------------------------------------------- */
+
 	private void Start() {
 
-		BeginMusic();
 		SpeedReset();
-
-	}
-
-	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
-		Analyser
-	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-	// Call function from beats.
-	private void Update() {
-		
-		
 
 	}
 
