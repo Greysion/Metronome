@@ -172,4 +172,6 @@ public class Player : MonoBehaviour
 		audioManager.StopMusic();
 	}
 
+	private void OnDestroy() => CancelInvoke();
+
 }

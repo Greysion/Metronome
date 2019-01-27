@@ -55,5 +55,7 @@ public class PowerupSpawner : MonoBehaviour
 			Invoke("SpawnMusic", (timeToSpawn - (Time.time - time)) / 2);
 		}
 	}
-    
+
+	private void OnDestroy() => CancelInvoke();
+
 }
