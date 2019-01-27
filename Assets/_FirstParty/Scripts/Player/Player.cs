@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Player : MonoBehaviour
 {
@@ -10,24 +9,69 @@ public class Player : MonoBehaviour
 
 	Camera mainCamera;
 
-	int health = 5;
+	[SerializeField]
+	int maxHealth = 5;
+
+	int health;
 
 	public int pickupLevel;
 
 	public bool invulnerable;
 
-	public static Action LevelGained, LevelLost;
+	public static Action<int> LevelGained, LevelLost;
+
+	float hitWeight = 0, levelWeight = 0;
+
+	PostProcessVolume ppHit, ppLevel;
+
+	[SerializeField]
+	float[] intensityLevels;
 
 	private void Start()
 	{
 		mainCamera = Camera.main;
+		health = maxHealth;
+		ppHit = mainCamera.transform.Find("ppDamage").GetComponent<PostProcessVolume>();
+		ppLevel = mainCamera.transform.Find("pplevelMod").GetComponent<PostProcessVolume>();
 	}
 
 	// Update is called once per frame
 	void Update()
     {
 		MovePlayer();
+		InvulnerableVisuals();
+		LevelVisuals();
     }
+
+	void InvulnerableVisuals()
+	{
+		if (invulnerable)
+		{
+			if (!(hitWeight >= 1))
+			{
+				hitWeight += Time.deltaTime * 5;
+				ppHit.weight = Mathf.Lerp(0, 1, hitWeight);
+			}
+
+		}
+		else
+		{
+			if (!(hitWeight <= 0))
+			{
+				hitWeight -= Time.deltaTime * 5;
+				ppHit.weight = Mathf.Lerp(1, 0, hitWeight);
+			}
+		}
+	}
+
+	void LevelVisuals()
+	{
+		float difference = levelWeight - intensityLevels[pickupLevel];
+		if (difference >= 0.005f)
+		{
+			levelWeight = Mathf.Lerp(levelWeight, intensityLevels[pickupLevel], Time.deltaTime * 10);
+		}
+	}
 
 	void MovePlayer()
 	{
@@ -69,7 +113,7 @@ public class Player : MonoBehaviour
 			LoseLevel();
 		}
 		invulnerable = true;
-		Invoke("InvulnerabilityOver", 0.8f);
+		Invoke("InvulnerabilityOver", 1);
 	}
 
 	void InvulnerabilityOver()
@@ -81,22 +125,22 @@ public class Player : MonoBehaviour
 	{
 
 		print("Level Lost");
-		LevelLost();
+		LevelLost(pickupLevel);
 		pickupLevel--;
 		if(pickupLevel <= 0)
 		{
 			LoseGame();
 		}
-		health = 5;
+		health = maxHealth;
 	}
 
 	void GainLevel()
 	{
 		print("Level Gained");
-		LevelGained();
+		LevelGained(pickupLevel);
 		pickupLevel++;
-		health = 5;
-		if(pickupLevel >= 7)
+		health = maxHealth;
+		if(pickupLevel >= 4)
 		{
 			WinGame();
 		}

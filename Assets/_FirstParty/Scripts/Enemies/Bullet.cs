@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
 
-	[SerializeField]
 	float speed = 2f;
 
     // Start is called before the first frame update
@@ -13,6 +12,11 @@ public class Bullet : MonoBehaviour
     {
 		Destroy(gameObject, 2f);
     }
+
+	public void SetSpeed(float bulletSpeed)
+	{
+		speed = bulletSpeed;
+	}
 
     // Update is called once per frame
     void Update()

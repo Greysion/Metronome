@@ -42,12 +42,12 @@ public class PowerupSpawner : MonoBehaviour
 		time = Time.time;
 	}
 
-	void GainLevel()
+	void GainLevel(int pickupLevel)
 	{
 		Invoke("SpawnMusic", timeToSpawn);
 	}
 
-	void LoseLevel()
+	void LoseLevel(int pickupLevel)
 	{
 		if (IsInvoking("SpawnMusic"))
 		{
