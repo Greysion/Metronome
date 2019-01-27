@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8569922275530928976}
   - component: {fileID: 185031480}
   - component: {fileID: 196339828}
+  - component: {fileID: 3133308029812113573}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -241,6 +242,18 @@ MonoBehaviour:
   maxRumble: 10
   rumbleLerpSpeed: 5
   cameraSpeed: 5
+--- !u!114 &3133308029812113573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971194625656253725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e597e4e9dd41e49b6c9200d29da9ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &963925354954619157
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -333,11 +346,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 971194625656253712}
     m_Modifications:
-    - target: {fileID: 8189510997948822851, guid: ed25d3378c5199e4bb2663fa3d82e863,
-        type: 3}
-      propertyPath: m_Name
-      value: AudioController
-      objectReference: {fileID: 0}
     - target: {fileID: 993719819729301911, guid: ed25d3378c5199e4bb2663fa3d82e863,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -392,6 +400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8189510997948822851, guid: ed25d3378c5199e4bb2663fa3d82e863,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed25d3378c5199e4bb2663fa3d82e863, type: 3}
@@ -483,11 +496,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 971194625656253712}
     m_Modifications:
-    - target: {fileID: 832741328736036935, guid: 8f00b095c9f25734181327216a47828d,
-        type: 3}
-      propertyPath: m_Name
-      value: ppFade
-      objectReference: {fileID: 0}
     - target: {fileID: 3815026094084927772, guid: 8f00b095c9f25734181327216a47828d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -543,6 +551,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 832741328736036935, guid: 8f00b095c9f25734181327216a47828d,
+        type: 3}
+      propertyPath: m_Name
+      value: ppFade
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f00b095c9f25734181327216a47828d, type: 3}
 --- !u!4 &5476448118393120029 stripped
@@ -558,11 +571,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 971194625656253712}
     m_Modifications:
-    - target: {fileID: 3747193549708842535, guid: 1bd4e8872a51bcf459fb62795161918e,
-        type: 3}
-      propertyPath: m_Name
-      value: ppGlobal
-      objectReference: {fileID: 0}
     - target: {fileID: 8102587724790843751, guid: 1bd4e8872a51bcf459fb62795161918e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -617,6 +625,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747193549708842535, guid: 1bd4e8872a51bcf459fb62795161918e,
+        type: 3}
+      propertyPath: m_Name
+      value: ppGlobal
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bd4e8872a51bcf459fb62795161918e, type: 3}

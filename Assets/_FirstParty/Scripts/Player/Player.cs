@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 
 	Camera mainCamera;
 
+	CameraShake shake;
+
 	[SerializeField]
 	int maxHealth = 5;
 
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
 	{
 		audioManager = FindObjectOfType<AudioManager>();
 		mainCamera = Camera.main;
+		shake = mainCamera.GetComponent<CameraShake>();
 		health = maxHealth;
 		ppHit = mainCamera.transform.Find("ppDamage").GetComponent<PostProcessVolume>();
 		ppLevel = mainCamera.transform.Find("ppLevelMod").GetComponent<PostProcessVolume>();
@@ -50,6 +53,7 @@ public class Player : MonoBehaviour
 	{
 		if (invulnerable)
 		{
+			shake.isRumbling = true;
 			if ((hitWeight != 1))
 			{
 				hitWeight = Mathf.Lerp(hitWeight, 1, Time.deltaTime * 10);
@@ -59,6 +63,7 @@ public class Player : MonoBehaviour
 		}
 		else
 		{
+			shake.isRumbling = false;
 			if ((hitWeight != 0))
 			{
 				hitWeight = Mathf.Lerp(hitWeight, 0, Time.deltaTime * 10);
@@ -135,6 +140,7 @@ public class Player : MonoBehaviour
 		if(pickupLevel <= 0)
 		{
 			LoseGame();
+			pickupLevel = 0;
 		}
 		health = maxHealth;
 	}
@@ -148,12 +154,13 @@ public class Player : MonoBehaviour
 		if(pickupLevel >= 4)
 		{
 			WinGame();
+			pickupLevel = 4;
 		}
 	}
 
 	void LoseGame()
 	{
-		print("Game Lost");
+		FindObjectOfType<GameManager>().GameOver();
 	}
 
 	void WinGame()
