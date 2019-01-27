@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PickupSpawn : MonoBehaviour
+public class PowerupSpawner : MonoBehaviour
 {
 
 	Camera mainCamera;
