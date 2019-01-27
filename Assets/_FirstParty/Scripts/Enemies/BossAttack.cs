@@ -11,14 +11,14 @@ public class BossAttack : MonoBehaviour
 	[SerializeField]
 	Transform bulletContainer;
 
-	[SerializeField]
-	float maxAngle = 45;
+	float maxAngle = 90;
+
+	int maxPositions = 16;
+
+	float bpm = 75, lowestBeatTime = 16;
 
 	[SerializeField]
-	int maxPositions = 10;
-
-	[SerializeField]
-	float bpm = 120, lowestBeatTime = 16;
+	float bulletSpeed = 5f;
 
 	float secondPerBeat;
 
@@ -28,39 +28,94 @@ public class BossAttack : MonoBehaviour
 
 	Transform player;
 
-	enum SpreadType { Pulse, Wave, Random, Directed }
+	enum SpreadType { Pulse, Wave, Random, Directed, NumberOfTypes }
 
-	[SerializeField]
-	SpreadType currentSpread = SpreadType.Wave;
+	SpreadType currentSpread = SpreadType.Wave, secondSpread = SpreadType.Pulse;
 
 	[SerializeField]
 	int patternLimit = 16;
 
-	[SerializeField]
-	SpreadType[] attackPattern;
+	SpreadType[] attackPattern, secondaryPattern;
+
+	string attackSpreadString = "01230103", easyAttackMode = "11021301", mediumAttackMode = "20303202", hardAttackMode = "01230123";
 
 	float timer;
 
-	int beats = 0, attacks = 0, currentAttack;
+	int attacks = 0, currentAttack;
+
+	int waveDirection = 1;
+
+	AudioManager audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
+		SetSpreadType(0);
 		anglePerPosition = (maxAngle * 2) / maxPositions;
-		secondPerBeat = 60 / bpm;
-		InvokeRepeating("Beat", 0, secondPerBeat / lowestBeatTime);
+		SetupBPM();
 		player = FindObjectOfType<Player>().transform;
+		audioManager = FindObjectOfType<AudioManager>();
+		Player.LevelGained += GainLevel;
+		Player.LevelLost += LoseLevel;
+		StartBeat();
     }
 
-	public void Beat()
+	void SetupBPM()
 	{
-		Attack(currentSpread);
-		beats++;
+		secondPerBeat = 60 / bpm;
+	}
+
+	public void StartBeat()
+	{
+		Beat();
+		audioManager.BeginMusic();
+	}
+
+	void Beat()
+	{
+		if (!(secondaryPattern.Length > 0))
+		{
+			Attack(currentSpread);
+		}
+		else
+		{
+			Attack(currentSpread, secondSpread);
+		}
+
 		if(attacks >= patternLimit)
 		{
 			attacks = 0;
 			currentAttack = (currentAttack + 1) % attackPattern.Length;
 			currentSpread = attackPattern[currentAttack];
+			if (secondaryPattern.Length != 0) secondSpread = secondaryPattern[currentAttack]; 
+		}
+
+		Invoke("Beat", secondPerBeat / lowestBeatTime);
+	}
+
+	void SetSpreadType(int currentMusicLevel)
+	{
+		switch(currentMusicLevel)
+		{
+			case 0:
+				attackPattern = ConvertSpreadString(easyAttackMode);
+				secondaryPattern = new SpreadType[0];
+				break;
+			case 1:
+				attackPattern = ConvertSpreadString(mediumAttackMode);
+				secondaryPattern = new SpreadType[0];
+				break;
+			case 2:
+				attackPattern = ConvertSpreadString(hardAttackMode);
+				secondaryPattern = new SpreadType[0];
+				break;
+			case 3:
+				attackPattern = ConvertSpreadString(easyAttackMode);
+				secondaryPattern = ConvertSpreadString(hardAttackMode);
+				break;
+			default:
+				break;
+
 		}
 	}
 
@@ -70,7 +125,7 @@ public class BossAttack : MonoBehaviour
 		switch(spread)
 		{
 			case SpreadType.Pulse:
-				if (beats % 16 != 0)
+				if ((attacks / 2) % 2 == 0)
 					break;
 				for (int i = 0; i <= maxPositions; i++)
 				{
@@ -79,15 +134,17 @@ public class BossAttack : MonoBehaviour
 				break;
 
 			case SpreadType.Wave:
-				Fire(SelectAngle(currentWavePosition));
-				currentWavePosition = (currentWavePosition + 1) % (maxPositions + 1);
+				Fire(SelectAngle(currentWavePosition + 1));
+				currentWavePosition = (currentWavePosition + (1 * waveDirection));
+				if (currentWavePosition >= maxPositions || currentWavePosition <= 0)
+					waveDirection *= -1;
 				break;
 
 			case SpreadType.Random:
 				Fire(SelectAngle(Random.Range(0, maxPositions + 1)));
 				break;
 			case SpreadType.Directed:
-				if (beats % 8 != 0)
+				if (attacks % 4 != 0)
 					break;
 				Fire(DirectionToTarget(player));
 				break;
@@ -95,16 +152,24 @@ public class BossAttack : MonoBehaviour
 		}
 	}
 
+	void Attack(SpreadType spread1, SpreadType spread2)
+	{
+		Attack(spread1);
+		Attack(spread2);
+	}
+
 	void Fire(float angle)
 	{
 		Quaternion newAngle = Quaternion.Euler(0, 0, angle);
-		Instantiate(bullet, transform.position, newAngle, bulletContainer);
+		GameObject spawned = Instantiate(bullet, transform.position, newAngle, bulletContainer);
+		spawned.GetComponent<Bullet>().SetSpeed(bulletSpeed);
 	}
 
 	void Fire(Vector3 direction)
 	{
 		GameObject spawned = Instantiate(bullet, transform.position, Quaternion.identity, bulletContainer);
 		spawned.transform.up = direction;
+		spawned.GetComponent<Bullet>().SetSpeed(bulletSpeed);
 	}
 
 	Vector3 DirectionToTarget(Transform target)
@@ -126,4 +191,60 @@ public class BossAttack : MonoBehaviour
 		}
 		return angle;
 	}
+
+	SpreadType[] ConvertSpreadString(string spread)
+	{
+		SpreadType[] spreadList = new SpreadType[spread.Length];
+		int i = 0;
+		foreach(char letter in spread)
+		{
+			
+			if(char.IsNumber(letter))
+			{
+				int num = letter - '0';
+				if(num >= (int)SpreadType.NumberOfTypes)
+				{
+					spreadList[i] = SpreadType.Random;
+				}
+				else spreadList[i] = (SpreadType)num;
+			} else
+			{
+				spreadList[i] = SpreadType.Random;
+			}
+			i++;
+		}
+		return spreadList;
+	}
+
+	SpreadType[] ConvertSpreadStringInverse(string spread)
+	{
+		char[] letters = spread.ToCharArray();
+		string newSpread = "";
+		for(int i = letters.Length; i >=0; i--)
+		{
+			newSpread += letters[i];
+		}
+		return ConvertSpreadString(newSpread);
+	}
+
+	void GainLevel(int currentLevel)
+	{
+		audioManager.SpeedIncrease(true);
+		SetSpreadType(currentLevel);
+		float speedIncrease = audioManager.speedStep;
+		bpm *= 1 + speedIncrease;
+		bulletSpeed *= 1.5f;
+		SetupBPM();
+	}
+
+	void LoseLevel(int currentLevel)
+	{
+		audioManager.SpeedIncrease(false);
+		SetSpreadType(currentLevel);
+		float speedIncrease = audioManager.speedStep;
+		bpm /= 1 + speedIncrease;
+		bulletSpeed /= 1.5f;
+		SetupBPM();
+	}
+
 }
