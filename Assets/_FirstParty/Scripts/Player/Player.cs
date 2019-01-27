@@ -54,21 +54,21 @@ public class Player : MonoBehaviour
 		if (invulnerable)
 		{
 			shake.isRumbling = true;
-			if ((hitWeight != 1))
+			/*if ((hitWeight != 1))
 			{
 				hitWeight = Mathf.Lerp(hitWeight, 1, Time.deltaTime * 10);
 				ppHit.weight = hitWeight;
-			}
+			}*/
 
 		}
 		else
 		{
 			shake.isRumbling = false;
-			if ((hitWeight != 0))
+			/*if ((hitWeight != 0))
 			{
 				hitWeight = Mathf.Lerp(hitWeight, 0, Time.deltaTime * 10);
 				ppHit.weight = hitWeight;
-			}
+			}*/
 		}
 	}
 

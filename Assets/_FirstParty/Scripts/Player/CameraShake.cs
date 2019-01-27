@@ -56,8 +56,10 @@ public class CameraShake : MonoBehaviour {
 		if (isRumbling)
 			currentRumble = Mathf.Lerp(currentRumble, maxRumble, Time.deltaTime * rumbleLerpSpeed * 3f);
 
-		else if (currentRumble > 0)
+		else if (currentRumble > 0.2)
 			currentRumble = Mathf.Lerp(currentRumble, 0f, Time.deltaTime * rumbleLerpSpeed);
+
+		currentRumble = Mathf.Clamp(currentRumble, 0f, maxRumble);
 
 		// If we're at a non-zero rumble, apply the shake to the camera's trajectory.
 		if (currentRumble != 0)
