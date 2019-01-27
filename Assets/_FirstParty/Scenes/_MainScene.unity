@@ -488,10 +488,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 168401363, guid: c86579b88b89ffe4d88dfc310a1e3050, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c86579b88b89ffe4d88dfc310a1e3050, type: 3}
 --- !u!1001 &8725737970413033895
