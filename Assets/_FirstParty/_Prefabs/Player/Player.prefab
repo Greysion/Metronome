@@ -319,8 +319,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fa505057423e7418b4be0c6fa9720d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  maxHealth: 5
+  speed: 70
+  maxHealth: 3
   pickupLevel: 0
   invulnerable: 0
-  intensityLevels: []
+  intensityLevels:
+  - 0
+  - 0.15
+  - 0.45
+  - 0.8
+  - 1
