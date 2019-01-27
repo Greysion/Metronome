@@ -27,12 +27,15 @@ public class Player : MonoBehaviour
 	[SerializeField]
 	float[] intensityLevels;
 
+	AudioManager audioManager;
+
 	private void Start()
 	{
+		audioManager = FindObjectOfType<AudioManager>();
 		mainCamera = Camera.main;
 		health = maxHealth;
 		ppHit = mainCamera.transform.Find("ppDamage").GetComponent<PostProcessVolume>();
-		ppLevel = mainCamera.transform.Find("pplevelMod").GetComponent<PostProcessVolume>();
+		ppLevel = mainCamera.transform.Find("ppLevelMod").GetComponent<PostProcessVolume>();
 	}
 
 	// Update is called once per frame
@@ -47,19 +50,19 @@ public class Player : MonoBehaviour
 	{
 		if (invulnerable)
 		{
-			if (!(hitWeight >= 1))
+			if ((hitWeight != 1))
 			{
-				hitWeight += Time.deltaTime * 5;
-				ppHit.weight = Mathf.Lerp(0, 1, hitWeight);
+				hitWeight = Mathf.Lerp(hitWeight, 1, Time.deltaTime * 10);
+				ppHit.weight = hitWeight;
 			}
 
 		}
 		else
 		{
-			if (!(hitWeight <= 0))
+			if ((hitWeight != 0))
 			{
-				hitWeight -= Time.deltaTime * 5;
-				ppHit.weight = Mathf.Lerp(1, 0, hitWeight);
+				hitWeight = Mathf.Lerp(hitWeight, 0, Time.deltaTime * 10);
+				ppHit.weight = hitWeight;
 			}
 		}
 	}
@@ -67,9 +70,10 @@ public class Player : MonoBehaviour
 	void LevelVisuals()
 	{
 		float difference = levelWeight - intensityLevels[pickupLevel];
-		if (difference >= 0.005f)
+		if (Mathf.Abs(difference) >= 0.005f)
 		{
 			levelWeight = Mathf.Lerp(levelWeight, intensityLevels[pickupLevel], Time.deltaTime * 10);
+			ppLevel.weight = levelWeight;
 		}
 	}
 
@@ -93,6 +97,8 @@ public class Player : MonoBehaviour
 		string tag = collision.transform.tag;
 		if(tag == "Bullet")
 		{
+			if (invulnerable)
+				return;
 			TakeDamage();
 			Destroy(collision.gameObject);
 		}
@@ -105,8 +111,7 @@ public class Player : MonoBehaviour
 
 	void TakeDamage()
 	{
-		if (invulnerable)
-			return;
+		audioManager.HitSFX();
 		health--;
 		if(health <= 0)
 		{
