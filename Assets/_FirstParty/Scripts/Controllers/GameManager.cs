@@ -40,10 +40,9 @@ public class GameManager : MonoBehaviour
 		} else if(animatingOut)
 		{
 			float difference = sceneWeight - 1;
-			sceneWeight = Mathf.Lerp(sceneWeight, 1, Time.deltaTime * 5);
-			if (Mathf.Abs(difference) <= 0.05f)
+			sceneWeight = Mathf.Lerp(sceneWeight, 1, Time.deltaTime * 10);
+			if (Mathf.Abs(difference) <= 0.001f)
 			{
-				animatingOut = false;
 				if(!IsInvoking("Restart"))
 					Invoke("Restart", 3);
 			}
