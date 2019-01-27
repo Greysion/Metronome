@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2691844750878673910}
   - component: {fileID: 6746650342424777048}
   - component: {fileID: 4904309754454964464}
+  - component: {fileID: 1066619736275129414}
   - component: {fileID: 1648010249}
   - component: {fileID: 5897545219970033980}
   m_Layer: 0
@@ -91,8 +92,24 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.48
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1066619736275129414
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3898775066879681158}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
 --- !u!96 &1648010249
 TrailRenderer:
   serializedVersion: 2

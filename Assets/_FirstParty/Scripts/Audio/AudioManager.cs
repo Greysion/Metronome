@@ -15,8 +15,14 @@ public class AudioManager : MonoBehaviour {
 		References
 	// --------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
-	[SerializeField] EventInstance mainTheme;
-	[SerializeField] ParameterInstance mainThemeHealth;
+	[SerializeField] private EventInstance mainTheme;
+	[SerializeField] private ParameterInstance mainThemeHealth;
+
+	private FMOD.DSP fft;
+
+	[SerializeField] private float startingSpeed = 0.8f;
+	[SerializeField] private float currentSpeed = 0f;
+	[SerializeField] private float speedStep = 0.1f;
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
 		Instantation
@@ -39,6 +45,8 @@ public class AudioManager : MonoBehaviour {
 	private void Start() {
 
 		BeginMusic();
+		SpeedReset();
+
 	}
 
 	/* --------------------------------------------------------------------------------------------------------------------------------------------------------- //
@@ -48,7 +56,7 @@ public class AudioManager : MonoBehaviour {
 	// Call function from beats.
 	private void Update() {
 		
-
+		
 
 	}
 
@@ -62,7 +70,9 @@ public class AudioManager : MonoBehaviour {
 
 	// Parameteres controlling the music.
 	public void HealthParam(float health) => mainThemeHealth.setValue(health);
-
+	public void SpeedReset() => mainTheme.setPitch(startingSpeed);
+	public void SpeedIncrease(bool increase) => mainTheme.setPitch(increase ? currentSpeed += speedStep : currentSpeed -= speedStep);
+	
 	/* ----------------------------------------------------------------------------- */
 
 }
