@@ -65,4 +65,8 @@ public class AudioManager : MonoBehaviour {
 
 	/* ----------------------------------------------------------------------------- */
 
+	public void HitSFX() => RuntimeManager.PlayOneShot("event:/Hit");
+
+	/* ----------------------------------------------------------------------------- */
+
 }

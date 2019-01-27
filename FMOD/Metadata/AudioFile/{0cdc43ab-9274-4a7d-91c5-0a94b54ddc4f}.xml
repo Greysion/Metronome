@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{0cdc43ab-9274-4a7d-91c5-0a94b54ddc4f}">
+        <property name="assetPath">
+            <value>381686__stumpbutt__retro-explosion-sfx.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.62009070294784585</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{77a4f427-37ad-4cba-ab7e-a78897d4ddce}</destination>
+        </relationship>
+    </object>
+</objects>
