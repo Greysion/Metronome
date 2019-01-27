@@ -58,10 +58,11 @@ public class AudioManager : MonoBehaviour {
 	public void StopMusic() => mainTheme.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
 	// Parameteres controlling the music.
-	public void HealthParam(float health) => mainThemeHealth.setValue(health);
 	public void SpeedReset() => mainTheme.setPitch(startingSpeed);
 	public void SpeedIncrease(bool increase) => mainTheme.setPitch(increase ? currentSpeed += speedStep : currentSpeed -= speedStep);
-	
+
+	public void DamagedFilter(float health) => mainThemeHealth.setValue(health);
+
 	/* ----------------------------------------------------------------------------- */
 
 }
